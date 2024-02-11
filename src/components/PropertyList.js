@@ -19,6 +19,7 @@ const PropertyList = () => {
 
       <h1 className="mb-4 text-center">List Of Properties</h1>
       
+      
       <Row>
         {properties.map(property => (
           <Col key={property.id} md={4} className="mb-4">
@@ -34,15 +35,24 @@ const PropertyList = () => {
                 <Card.Text>Price: {property.price}</Card.Text>
 
                 <Link to={`/properties/${property.id}`}>
-                <Button variant="outline-primary rounded-pill" className='col-12'>
+                <Button variant="outline-primary rounded-pill" className='col-12 mb-2'>
                   View Details
                 </Button>
+                </Link>
+
+                <Link to={`/edit-property/${property.id}`}>
+                  <Button variant="outline-warning rounded-pill" className='col-12'>
+                    Edit Property
+                  </Button>
                 </Link>
               </Card.Body>
             </Card>
           </Col>
         ))}
       </Row>
+      <Link to="/add-property" className="mb-3">
+        <Button variant="outline-success" className='rounded-pill mb-4 col-12'>Add New Property</Button>
+      </Link>
     </div>
   );
 };

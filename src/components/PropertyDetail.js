@@ -20,30 +20,34 @@ const PropertyDetail = () => {
   }
 
   return (
-    <Container className="my-3 col-lg-8">
-      <Card>
-        
-        {property.thumbnail && (
-          <Card.Img variant="top" src={property.thumbnail} alt="Property Thumbnail" />
-        )}
+    <div>
+        <h1 className="my-4 text-center">Property Details</h1>
 
-        <Card.Body>
+        <Container className="my-3 col-lg-8">
+        <Card>
 
-          <Card.Title className='text-center'>{property.title}</Card.Title>
+            {property.thumbnail && (
+            <Card.Img variant="top" src={property.thumbnail} alt="Property Thumbnail" />
+            )}
 
-          <Card.Text>Address: {property.address}</Card.Text>
-          <Card.Text>Price: {property.price}</Card.Text>
-          <Card.Text>Description: {property.description}</Card.Text>
+            <Card.Body>
 
-          <Link to="/">
-            <Button variant="outline-primary rounded-pill" className="mb-3 col-12">
-              Back to Properties Page
-            </Button>
-          </Link>
+            <Card.Title className='text-center'>{property.title}</Card.Title>
 
-        </Card.Body>
-      </Card>
-    </Container>
+            <Card.Text>Address: {property.address}</Card.Text>
+            <Card.Text>Price: {property.price}</Card.Text>
+            <Card.Text>Description: {property.description}</Card.Text>
+
+            <Link to="/">
+                <Button variant="outline-primary rounded-pill" className="mb-3 col-12">
+                Back to Properties Page
+                </Button>
+            </Link>
+
+            </Card.Body>
+        </Card>
+        </Container>
+    </div>
   );
 };
 
