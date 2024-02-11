@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
+import { Link } from 'react-router-dom';
 import { Card, Button, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,7 +17,7 @@ const PropertyList = () => {
   return (
     <div className="container mt-4">
 
-      <h1 className="mb-4 text-center">Property Listings</h1>
+      <h1 className="mb-4 text-center">List Of Properties</h1>
       
       <Row>
         {properties.map(property => (
@@ -32,9 +33,11 @@ const PropertyList = () => {
                 <Card.Text>Address: {property.address}</Card.Text>
                 <Card.Text>Price: {property.price}</Card.Text>
 
-                <Button variant="btn btn-outline-primary rounded-pill" className='col-12'>
+                <Link to={`/properties/${property.id}`}>
+                <Button variant="outline-primary rounded-pill" className='col-12'>
                   View Details
                 </Button>
+                </Link>
               </Card.Body>
             </Card>
           </Col>
