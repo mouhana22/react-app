@@ -5,11 +5,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PropertyList from './components/PropertyList';
 import PropertyDetail from './components/PropertyDetail';
 import PropertyForm from './components/PropertyForm';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
-    <div className="container">
       <Router>
+        <NavBar />
         <Routes>
           <Route path="/" element={<PropertyList />} />
           <Route path="/properties/:id" element={<PropertyDetail />} />
@@ -17,7 +18,6 @@ function App() {
           <Route path="/edit-property/:id" element={<PropertyForm />} />
         </Routes>
       </Router>
-    </div>
   );
 }
 

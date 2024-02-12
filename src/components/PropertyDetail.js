@@ -20,7 +20,7 @@ const PropertyDetail = () => {
   }
 
   return (
-    <div>
+    <div className="container mt-4">
         <h1 className="my-4 text-center">Property Details</h1>
 
         <Container className="my-3 col-lg-8">

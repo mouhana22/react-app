@@ -48,6 +48,9 @@ const PropertyList = () => {
 
       <h1 className="mb-4 text-center">List Of Properties</h1>
       
+      <Link to="/add-property" className="mb-3">
+        <Button variant="outline-success" className='rounded-pill mb-4 col-12'>Add New Property</Button>
+      </Link>
       
       <Row>
         {properties.map(property => (
@@ -88,9 +91,7 @@ const PropertyList = () => {
           </Col>
         ))}
       </Row>
-      <Link to="/add-property" className="mb-3">
-        <Button variant="outline-success" className='rounded-pill mb-4 col-12'>Add New Property</Button>
-      </Link>
+
 
       {/* Delete Property Modal */}
       <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>

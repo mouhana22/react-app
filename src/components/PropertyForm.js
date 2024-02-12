@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import api from '../api';
 
 const PropertyForm = () => {
-    
+
   const { id } = useParams();
 
   //initial states
@@ -60,7 +60,7 @@ const PropertyForm = () => {
   };
 
   return (
-    <div>
+    <div className="container mt-4">
         <h1 className="my-4 text-center">Property Form</h1>
         <form className="mt-4" noValidate onSubmit={handleSubmit}>
         <div className="mb-3">
