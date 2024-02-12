@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 import { Link } from 'react-router-dom';
-import { Card, Button, Row, Col } from 'react-bootstrap';
+import { Card, Button, Row, Col, Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [propertyToDelete, setPropertyToDelete] = useState(null);
 
   useEffect(() => {
     // Fetch properties from the API
@@ -13,6 +15,33 @@ const PropertyList = () => {
       .then(response => setProperties(response.data))
       .catch(error => console.error('Error fetching properties:', error));
   }, []);
+
+  // show modal
+  const handleShowDeleteModal = (property) => {
+    setPropertyToDelete(property);
+    setShowDeleteModal(true);
+  };
+
+  // close modal
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setPropertyToDelete(null);
+  };
+
+   // Handle delete, after user's confirm
+  const handleDeleteProperty = () => {
+    if (propertyToDelete) {
+      api.delete(`/properties/${propertyToDelete.id}`)
+        .then(() => {
+          // Refresh the property list after deletion
+          api.get('/properties')
+            .then(response => setProperties(response.data))
+            .catch(error => console.error('Error fetching properties:', error));
+        })
+        .catch(error => console.error('Error deleting property:', error))
+        .finally(() => handleCloseDeleteModal());
+    }
+  };
 
   return (
     <div className="container mt-4">
@@ -45,6 +74,15 @@ const PropertyList = () => {
                     Edit Property
                   </Button>
                 </Link>
+
+                <Button
+                  variant="outline-danger rounded-pill mt-2"
+                  className='col-12'
+                  onClick={() => handleShowDeleteModal(property)}
+                >
+                  Delete Property
+                </Button>
+
               </Card.Body>
             </Card>
           </Col>
@@ -53,6 +91,26 @@ const PropertyList = () => {
       <Link to="/add-property" className="mb-3">
         <Button variant="outline-success" className='rounded-pill mb-4 col-12'>Add New Property</Button>
       </Link>
+
+      {/* Delete Property Confirmation Modal */}
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Property</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {propertyToDelete && (
+            <p>Are you sure you want to delete the property "{propertyToDelete.title}"?</p>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDeleteProperty}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };
