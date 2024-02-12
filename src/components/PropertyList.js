@@ -92,7 +92,7 @@ const PropertyList = () => {
         <Button variant="outline-success" className='rounded-pill mb-4 col-12'>Add New Property</Button>
       </Link>
 
-      {/* Delete Property Confirmation Modal */}
+      {/* Delete Property Modal */}
       <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Property</Modal.Title>
